@@ -1,0 +1,111 @@
+{
+  "name": "vue-script-type-check",
+  "version": "0.1.0",
+  "description": "Command line Type-Checking tool for only the script part of Vue",
+  "main": "index.js",
+  "bin": {
+    "vue-script-type-check": "dist/cli.js",
+    "vstc": "dist/cli.js"
+  },
+  "keywords": [
+    "typescript",
+    "cli",
+    "utility"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "lint": "eslint --fix '{src,tests}/**/*.{ts,js}'",
+    "format": "prettier --write '{src,tests}/**/*.{ts,js}'",
+    "test": "vitest",
+    "test:ci": "vitest run",
+    "prepare": "husky install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kawamataryo/vue-script-type-check.git"
+  },
+  "author": "Ryo Kawamata <ba068082@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kawamataryo/vue-script-type-check/issues"
+  },
+  "homepage": "https://github.com/kawamataryo/vue-script-type-check#readme",
+  "dependencies": {
+    "chalk": "4.1.2",
+    "cli-progress": "^3.10.0",
+    "node-html-parser": "^5.3.3",
+    "ts-morph": "^15.0.0",
+    "yargs": "^17.4.1"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "17.0.2",
+    "@commitlint/config-conventional": "17.0.2",
+    "@types/cli-progress": "3.11.0",
+    "@types/glob": "7.2.0",
+    "@types/node": "16.11.40",
+    "@types/react": "18.0.12",
+    "@types/yargs": "17.0.10",
+    "@typescript-eslint/eslint-plugin": "5.28.0",
+    "@typescript-eslint/parser": "5.28.0",
+    "cz-conventional-changelog": "3.3.0",
+    "eslint": "8.17.0",
+    "eslint-config-prettier": "8.5.0",
+    "husky": "8.0.1",
+    "lint-staged": "13.0.1",
+    "prettier": "2.7.0",
+    "semantic-release": "19.0.3",
+    "ts-node": "10.8.1",
+    "vitest": "0.15.0"
+  },
+  "peerDependencies": {
+    "typescript": "*"
+  },
+  "lint-staged": {
+    "*.{ts,js}": [
+      "eslint --cache --fix",
+      "prettier --write"
+    ]
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "release": {
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      [
+        "@semantic-release/release-notes-generator",
+        {
+          "preset": "angular",
+          "presetConfig": {
+            "types": [
+              {
+                "type": "chore",
+                "section": "Chore"
+              },
+              {
+                "type": "refactor",
+                "section": "Refactor"
+              },
+              {
+                "type": "perf",
+                "section": "Performance"
+              }
+            ]
+          }
+        }
+      ],
+      "@semantic-release/github",
+      "@semantic-release/npm"
+    ],
+    "branches": [
+      "main"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}
