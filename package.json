@@ -1,6 +1,6 @@
 {
   "name": "vue-script-type-check",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Command line Type-Checking tool for only the script part of Vue",
   "main": "index.js",
   "bin": {
