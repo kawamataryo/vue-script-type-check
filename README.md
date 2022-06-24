@@ -15,7 +15,7 @@ https://user-images.githubusercontent.com/11070996/175428327-a67f970a-46d4-4de1-
 Run the script in the directory where `tsconfig.json` is located.
 
 ```bash
-$ npx vstc ./src/**/*.vue
+$ npx vue-script-type-check ./src/**/*.vue
 ```
 
 ### options
