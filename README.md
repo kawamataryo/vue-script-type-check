@@ -35,5 +35,5 @@ vue-script-type-check is available under the MIT License.
 
 ## 🛣️ TODO
 
-- [ ] Fix bug where accurate line numbers were not displayed
+- [x] Fix bug where accurate line numbers were not displayed
 - [ ] Add auto publish
