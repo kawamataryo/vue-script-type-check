@@ -10,8 +10,11 @@ const getMessageText = (d: Diagnostic): string => {
   return maybeMessageText.getMessageText();
 };
 
-const createErrorMessageFromDiagnostics = (d: Diagnostic): string => {
-  const lineNumber = d.getLineNumber();
+const createErrorMessageFromDiagnostics = (
+  d: Diagnostic,
+  scriptStartLineCount: number
+): string => {
+  const lineNumber = (d.getLineNumber() ?? 0) + scriptStartLineCount;
   const errorCode = d.getCode();
   const messageText = getMessageText(d);
   const relativePath =
@@ -26,7 +29,13 @@ const createErrorMessageFromDiagnostics = (d: Diagnostic): string => {
   )} - ${chalk.red("error")} TS${errorCode}: ${messageText}`;
 };
 
-export const collectTsErrors = (sourceFile: SourceFile): string[] => {
+export const collectTsErrors = ({
+  sourceFile,
+  scriptStartLineCount,
+}: {
+  sourceFile: SourceFile;
+  scriptStartLineCount: number;
+}): string[] => {
   return sourceFile
     .getPreEmitDiagnostics()
     .map((d) => {
@@ -35,7 +44,7 @@ export const collectTsErrors = (sourceFile: SourceFile): string[] => {
       if (diagnosticCategory !== 1) {
         return "";
       }
-      return createErrorMessageFromDiagnostics(d);
+      return createErrorMessageFromDiagnostics(d, scriptStartLineCount);
     })
     .filter((s) => s);
 };

@@ -17,7 +17,7 @@ describe("collectTsErrors", () => {
       `,
       fileName: "target.ts",
       expected: [
-        "\x1B[36mtarget\x1B[39m:\x1B[33m2\x1B[39m:\x1B[33m15\x1B[39m - \x1B[31merror\x1B[39m TS2322: Type 'number' is not assignable to type 'string'.",
+        "\x1B[32mtarget\x1B[39m:\x1B[33m2\x1B[39m - \x1B[31merror\x1B[39m TS2322: Type 'number' is not assignable to type 'string'.",
       ],
     },
     {
@@ -27,7 +27,7 @@ describe("collectTsErrors", () => {
       `,
       fileName: "target.ts",
       expected: [
-        "\x1B[36mtarget\x1B[39m:\x1B[33m3\x1B[39m:\x1B[33m56\x1B[39m - \x1B[31merror\x1B[39m TS2345: Argument of type 'string' is not assignable to parameter of type 'number'.",
+        "\x1B[32mtarget\x1B[39m:\x1B[33m3\x1B[39m - \x1B[31merror\x1B[39m TS2345: Argument of type 'string' is not assignable to parameter of type 'number'.",
       ],
     },
     {
@@ -39,8 +39,8 @@ describe("collectTsErrors", () => {
       `,
       fileName: "target.ts",
       expected: [
-        "\x1B[36mtarget\x1B[39m:\x1B[33m3\x1B[39m:\x1B[33m56\x1B[39m - \x1B[31merror\x1B[39m TS2345: Argument of type 'string' is not assignable to parameter of type 'number'.",
-        "\x1B[36mtarget\x1B[39m:\x1B[33m5\x1B[39m:\x1B[33m74\x1B[39m - \x1B[31merror\x1B[39m TS2322: Type 'number' is not assignable to type 'string'.",
+        "\x1B[32mtarget\x1B[39m:\x1B[33m3\x1B[39m - \x1B[31merror\x1B[39m TS2345: Argument of type 'string' is not assignable to parameter of type 'number'.",
+        "\x1B[32mtarget\x1B[39m:\x1B[33m5\x1B[39m - \x1B[31merror\x1B[39m TS2322: Type 'number' is not assignable to type 'string'.",
       ],
     },
     {
@@ -56,7 +56,7 @@ describe("collectTsErrors", () => {
       overwrite: true,
     });
 
-    const result = collectTsErrors(sourceFile);
+    const result = collectTsErrors({ sourceFile, scriptStartLineCount: 0 });
 
     expect(result).toEqual(expected);
   });

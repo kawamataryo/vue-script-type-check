@@ -28,7 +28,9 @@ describe("extractScriptFromVue", () => {
         }
       </style>
       `,
-      expected: `
+      expected: [
+        5,
+        `
         import Vue from 'vue'
 
         export Vue.extend({
@@ -40,6 +42,7 @@ describe("extractScriptFromVue", () => {
           }
         })
       `,
+      ],
     },
     {
       source: `
@@ -66,7 +69,7 @@ describe("extractScriptFromVue", () => {
         }
       </style>
       `,
-      expected: "",
+      expected: [0, ""],
     },
   ])("extractScript", ({ source, expected }) => {
     const result = extractTypeScriptFromVue(source);
