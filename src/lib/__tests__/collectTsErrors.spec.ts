@@ -1,6 +1,7 @@
 import { Project, ts } from "ts-morph";
 import { describe, it, expect, beforeAll } from "vitest";
 import { collectTsErrors } from "../collectTsErrors";
+import chalk from "chalk";
 
 describe("collectTsErrors", () => {
   let project: Project;
@@ -17,7 +18,9 @@ describe("collectTsErrors", () => {
       `,
       fileName: "target.ts",
       expected: [
-        "\x1B[32mtarget\x1B[39m:\x1B[33m2\x1B[39m - \x1B[31merror\x1B[39m TS2322: Type 'number' is not assignable to type 'string'.",
+        `${chalk.green("target")}:${chalk.yellow("2")} - ${chalk.red(
+          "error"
+        )} TS2322: Type 'number' is not assignable to type 'string'.`,
       ],
     },
     {
@@ -27,7 +30,9 @@ describe("collectTsErrors", () => {
       `,
       fileName: "target.ts",
       expected: [
-        "\x1B[32mtarget\x1B[39m:\x1B[33m3\x1B[39m - \x1B[31merror\x1B[39m TS2345: Argument of type 'string' is not assignable to parameter of type 'number'.",
+        `${chalk.green("target")}:${chalk.yellow("3")} - ${chalk.red(
+          "error"
+        )} TS2345: Argument of type 'string' is not assignable to parameter of type 'number'.`,
       ],
     },
     {
@@ -39,8 +44,12 @@ describe("collectTsErrors", () => {
       `,
       fileName: "target.ts",
       expected: [
-        "\x1B[32mtarget\x1B[39m:\x1B[33m3\x1B[39m - \x1B[31merror\x1B[39m TS2345: Argument of type 'string' is not assignable to parameter of type 'number'.",
-        "\x1B[32mtarget\x1B[39m:\x1B[33m5\x1B[39m - \x1B[31merror\x1B[39m TS2322: Type 'number' is not assignable to type 'string'.",
+        `${chalk.green("target")}:${chalk.yellow("3")} - ${chalk.red(
+          "error"
+        )} TS2345: Argument of type 'string' is not assignable to parameter of type 'number'.`,
+        `${chalk.green("target")}:${chalk.yellow("5")} - ${chalk.red(
+          "error"
+        )} TS2322: Type 'number' is not assignable to type 'string'.`,
       ],
     },
     {
